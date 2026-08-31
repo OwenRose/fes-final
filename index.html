@@ -37,7 +37,7 @@
       </header>
 
       <main>
-        <section class="hero">
+        <section class="hero reveal" data-direction="left">
           <div class="hero-copy">
             <h1>Beautiful React Templates for you.</h1>
             <p>
@@ -67,7 +67,7 @@
           </div>
         </section>
 
-        <section class="features section">
+        <section class="features section reveal" data-direction="right">
           <div class="section-head">
             <p class="eyebrow">Features</p>
             <h2>We have Amazing Service.</h2>
@@ -128,7 +128,7 @@
           </div>
         </section>
 
-        <section class="quality section">
+        <section class="quality section reveal" data-direction="left">
           <div class="quality-visuals">
             <img
               src="https://treact.owaiskhan.me/static/media/hero-screenshot-1.40a097b525c2f8c9808e.png"
@@ -154,7 +154,7 @@
           </div>
         </section>
 
-        <section class="steps section">
+        <section class="steps section reveal" data-direction="right">
           <div class="steps-visual">
             <div class="mini-grid"></div>
             <img
@@ -193,7 +193,7 @@
           </div>
         </section>
 
-        <section class="values section">
+        <section class="values section reveal" data-direction="left">
           <div class="values-visual">
             <img
               src="https://treact.owaiskhan.me/static/media/love-illustration.c759090fa833369ad6ffb6eb19cacb3e.svg"
@@ -232,7 +232,7 @@
           </div>
         </section>
 
-        <section class="pricing section">
+        <section class="pricing section reveal" data-direction="right">
           <div class="section-head center">
             <p class="eyebrow">Pricing</p>
             <h2>Reasonable &amp; Flexible Plans.</h2>
@@ -299,7 +299,7 @@
           </div>
         </section>
 
-        <section class="testimonials section">
+        <section class="testimonials section reveal" data-direction="left">
           <div class="testimonial-top">
             <p class="eyebrow">Testimonials</p>
             <h2>Our Clients Love Us.</h2>
@@ -354,7 +354,7 @@
           </div>
         </section>
 
-        <section class="faq section">
+        <section class="faq section reveal" data-direction="right">
           <div class="faq-intro">
             <p class="eyebrow">FAQs</p>
             <h2>You have Questions ?</h2>
@@ -388,7 +388,7 @@
         </section>
       </main>
 
-      <footer class="site-footer">
+      <footer class="site-footer reveal" data-direction="left">
         <section class="footer-cta">
           <h2>Developers all over the world are happily using Treact.</h2>
           <div class="cta-buttons">
@@ -463,5 +463,31 @@
         </div>
       </footer>
     </div>
+
+    <script>
+      const revealElements = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        }
+      );
+
+      revealElements.forEach((element) => {
+        if (!element.dataset.direction) {
+          element.dataset.direction = element.matches(':nth-of-type(odd)') ? 'left' : 'right';
+        }
+        revealObserver.observe(element);
+      });
+    </script>
   </body>
 </html>
